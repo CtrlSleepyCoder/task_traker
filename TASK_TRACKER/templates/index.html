@@ -1,0 +1,45 @@
+<h1>Tasks</h1>
+
+<a href="/logout/">Logout</a>
+
+<form method="post">
+    {% csrf_token %}
+    <input name="title" placeholder="Task">
+    <button>Add</button>
+</form>
+
+<ul>
+{% for task in tasks %}
+    <li>
+        {% if task.done %}
+            <s>{{ task.title }}</s>
+        {% else %}
+            {{ task.title }}
+        {% endif %}
+
+        <a href="/toggle/{{ task.id }}/">✔</a>
+        <a href="/delete/{{ task.id }}/">X</a>
+    </li>
+{% endfor %}
+</ul>
+
+<h2>Login</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <input name="username">
+    <input name="password" type="password">
+    <button>Login</button>
+</form>
+
+<a href="/register/">Register</a>
+
+<h2>Register</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <input name="username">
+    <input name="password" type="password">
+    <button>Create</button>
+</form>
+
